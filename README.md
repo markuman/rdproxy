@@ -13,3 +13,18 @@
 
 * python 3
 * `pip install bottle redis requests`
+
+
+# docker
+
+1. make redis available
+  * `docker run -d --name redis --net mynet -p 6379:6379 redis:alpine`
+2. make some of your apps available
+  * `docker run -d --name u1 --net mynet u:latest` 
+  *  this one is a static page which listen on port 80, but not available from host
+3. add route in redis
+  * `set u "http://u1"`
+  * don't forget `http://`! (`https` is not supported)
+4. run rdproxy
+  * `docker run -d --name rdproxy --net mynet -p 80:80 -e REDIS_HOST=redis rdproxy:latest`
+5. enter in your browser `http://127.0.0.1/u/` and your docker server from step 2 will be available
