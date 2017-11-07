@@ -9,6 +9,7 @@ REDIS_PORT = os.environ.get('REDIS_PORT') or 6379
 REDIS_DB = os.environ.get('REDIS_DB') or 0
 REDIS_PASSWORD = os.environ.get('REDIS_PASSWORD')
 RDPROXY_PORT = os.environ.get('RDPROXY_PORT') or 8000
+RDPROXY_HOST = os.environ.get('RDPROXY_HOST') or 'localhost'
 RDPROXY_DEBUG = os.environ.get('RDPROXY_DEBUG') or False
 
 
@@ -41,4 +42,4 @@ def rdproxy(uri = None, opt = None):
         abort(404, "Route not found")
 
 if __name__ == '__main__':
-    run(host='localhost', port=RDPROXY_PORT, debug=RDPROXY_DEBUG)
+    run(host=RDPROXY_HOST, port=RDPROXY_PORT, debug=RDPROXY_DEBUG)
