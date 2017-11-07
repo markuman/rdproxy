@@ -1,3 +1,8 @@
+* https://github.com/markuman/rdproxy
+* mirror: https://gitlab.com/markuman/rdproxy
+* docker registry: `docker pull registry.gitlab.com/markuman/rdproxy`
+
+
 # rdproxy
 
 
@@ -28,3 +33,5 @@
 4. run rdproxy
     * `docker run -d --name rdproxy --net mynet -p 80:80 -e REDIS_HOST=redis rdproxy:latest`
 5. enter in your browser `http://127.0.0.1/u/` and your docker server from step 2 will be available
+
+
