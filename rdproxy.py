@@ -1,4 +1,4 @@
-from bottle import route, run, hook, request, abort, redirect
+from bottle import route, run, hook, request, abort, redirect, response
 import requests
 import redis
 import os
@@ -36,6 +36,7 @@ def rdproxy(uri = None, opt = None):
 
     if url:
         ret = requests.get(url + "/" + opt)
+        response.headers['Content-Type'] = ret.headers["Content-Type"]
         return ret.content
 
     else:
