@@ -19,6 +19,30 @@
 * python 3
 * `pip install bottle redis requests`
 
+# setup
+
+`rdproxy` is using environment variables instead of a config file.
+
+* `REDIS_HOST`
+  * default value `localhost`
+* `REDIS_PORT`
+  * default vvalue `6379`
+* `REDIS_DB` 
+  * default value `0`
+* `REDIS_PASSWORD` 
+  * no default value
+
+In redis you can set the following keys for `rdproxy`
+
+* `RDPROXY:PORT`
+  * default `8000`
+* `RDPROXY:HOST`
+  * default `localhost`
+* `RDPROXY:DEBUG`
+  * default `false`
+
+e.g. `127.0.0.1:6379> set "RDPROXY:PORT" 8080`
+
 
 # docker
 
