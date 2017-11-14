@@ -2,18 +2,29 @@ from bottle import route, run, hook, request, abort, redirect, response
 import requests
 import redis
 import os
+import logging
 
-# no config, just environment variables
+# init stuff
+logging.basicConfig()
+logger = logging.getLogger('rdproxy')
+
 REDIS_HOST = os.environ.get('REDIS_HOST') or 'localhost'
 REDIS_PORT = os.environ.get('REDIS_PORT') or 6379
 REDIS_DB = os.environ.get('REDIS_DB') or 0
 REDIS_PASSWORD = os.environ.get('REDIS_PASSWORD')
-RDPROXY_PORT = os.environ.get('RDPROXY_PORT') or 8000
-RDPROXY_HOST = os.environ.get('RDPROXY_HOST') or 'localhost'
-RDPROXY_DEBUG = os.environ.get('RDPROXY_DEBUG') or False
 
-
+# init database connection
 r = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB, password=REDIS_PASSWORD, charset="utf-8", decode_responses=True)
+
+try:
+    r.ping()
+    RDPROXY_PORT = r.get('RDPROXY:PORT') or 8000
+    RDPROXY_HOST = r.get('RDPROXY:HOST') or 'localhost'
+    RDPROXY_DEBUG = r.get('RDPROXY:DEBUG') or False
+except:
+    logger.error("cannot connect to redis")
+    exit(0)
+
 
 # FUCK rfc3986
 @hook('before_request')
