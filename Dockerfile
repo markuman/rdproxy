@@ -7,7 +7,7 @@ WORKDIR /
 COPY rdproxy.py /rdproxy.py
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
-ENV REDIS_HOST 127.0.0.1
+ENV REDIS_HOST redis
 ENV REDIS_PORT 6379
 ENV REDIS_DB 0
 ENV RDPROXY_PORT 80
