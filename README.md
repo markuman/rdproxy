@@ -1,1 +1,1 @@
-bye bye microsoft. please visit https://git.osuv.de/m/markuman/rdproxy
+bye bye microsoft. please visit https://git.osuv.de/m/rdproxy
